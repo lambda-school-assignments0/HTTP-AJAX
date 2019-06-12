@@ -6,7 +6,7 @@ export default class FriendList extends React.Component {
         return (
             <div className='friend-wrapper'>
                 {this.props.friends.map(friend => (
-                    <Friend friend={friend} />
+                    <Friend friend={friend} key={friend.id} />
                 ))}
             </div>
         );
