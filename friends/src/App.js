@@ -11,6 +11,9 @@ class App extends React.Component {
     this.state = {
       errorMsg: '',
       friends: [],
+      inputName: '',
+      inputAge: '',
+      inputEmail: '',
     }
   }
 
@@ -24,20 +27,24 @@ class App extends React.Component {
       });
   }
 
+  handleTextChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
   handleAddFriend = e => {
     e.preventDefault();
-    let newFriendName = document.getElementsByName('name')[0].value;
-    let newFriendAge = document.getElementsByName('age')[0].value;
-    let newFriendEmail = document.getElementsByName('email')[0].value;
 
     this.setState({
       friends: [...this.state.friends, 
         {
           id: this.state.friends[this.state.friends.length-1].id + 1,
-          name: newFriendName,
-          age: newFriendAge,
-          email: newFriendEmail,
-        }]
+          name: this.state.inputName,
+          age: this.state.inputAge,
+          email: this.state.inputEmail,
+        }],
+      inputName: '',
+      inputAge: '',
+      inputEmail: '',
     })
   }
   
@@ -45,7 +52,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <FriendList friends={this.state.friends} />
-        <FriendForm handleAddFriend={this.handleAddFriend} />
+        <FriendForm handleTextChange={this.handleTextChange} inputName={this.state.inputName} inputAge={this.state.inputAge} inputEmail={this.state.inputEmail} handleAddFriend={this.handleAddFriend} />
       </div>
     );
   }
