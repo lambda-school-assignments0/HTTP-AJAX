@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 export default class FriendForm extends React.Component {
     render() {
         return (
-            <Form onSubmit={this.props.handleAddFriend}>
+            <Form className='friend-form' onSubmit={this.props.handleAddFriend}>
                 <h2>New Friend Form:</h2>
                 <FormGroup>
                     <Label for='name'>Name</Label>
