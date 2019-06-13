@@ -11,9 +11,6 @@ class App extends React.Component {
     this.state = {
       errorMsg: '',
       friends: [],
-      inputName: '',
-      inputAge: '',
-      inputEmail: '',
     }
   }
 
@@ -22,37 +19,29 @@ class App extends React.Component {
       .get('http://localhost:5000/friends')
       .then(response => this.setState({ friends: response.data }))
       .catch(err => {
-        console.log(err);
         this.setState({ errorMsg: err });
       });
   }
 
-  handleTextChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  handleAddFriend = e => {
+  addFriend = (e, friend) => {
     e.preventDefault();
-
-    this.setState({
-      friends: [...this.state.friends, 
-        {
-          id: this.state.friends[this.state.friends.length-1].id + 1,
-          name: this.state.inputName,
-          age: this.state.inputAge,
-          email: this.state.inputEmail,
-        }],
-      inputName: '',
-      inputAge: '',
-      inputEmail: '',
-    })
+    axios
+      .post('http://localhost:5000/friends', friend)
+      .then(response => {
+        this.setState({
+          friends: response.data
+        });
+      })
+      .catch(err => {
+        this.setState({ errorMsg: err });
+      });
   }
   
   render() {
     return (
       <div className="App">
         <FriendList friends={this.state.friends} />
-        <FriendForm handleTextChange={this.handleTextChange} inputName={this.state.inputName} inputAge={this.state.inputAge} inputEmail={this.state.inputEmail} handleAddFriend={this.handleAddFriend} />
+        <FriendForm addFriend={this.addFriend} />
       </div>
     );
   }
