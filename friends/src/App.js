@@ -39,8 +39,9 @@ class App extends React.Component {
 
   deleteFriend = (e, friend) => {
     e.preventDefault();
+    console.log(friend);
     axios
-      .delete('http://localhost:5000/friends', friend)
+      .delete(`http://localhost:5000/friends/${friend.id}`, friend)
       .then(response => {
         this.setState({
           friends: response.data
@@ -68,7 +69,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <FriendList friends={this.state.friends} />
+        <FriendList friends={this.state.friends} deleteFriend={this.deleteFriend} updateFriend={this.updateFriend} />
         <FriendForm addFriend={this.addFriend} />
       </div>
     );
