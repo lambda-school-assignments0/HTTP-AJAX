@@ -39,7 +39,6 @@ class App extends React.Component {
 
   deleteFriend = (e, friend) => {
     e.preventDefault();
-    console.log(friend);
     axios
       .delete(`http://localhost:5000/friends/${friend.id}`, friend)
       .then(response => {
