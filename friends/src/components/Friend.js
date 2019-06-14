@@ -114,7 +114,8 @@ export default class Friend extends React.Component {
                     <Modal isOpen={this.state.modalDelete} toggle={() => this.toggleModal('delete')}>
                         <ModalHeader toggle={() => this.toggleModal('delete')} className='bg-dark text-white'>Delete Friend</ModalHeader>
                         <ModalBody className='bg-dark text-white'>
-                            {`Are you sure you want to delete ${this.props.friend.name}?`}
+                            {`Are you sure you want to delete ${this.props.friend.name}?`} <br />
+                            {`${this.props.friend.name} will be sad. ):`}
                         </ModalBody>
                         <ModalFooter className='bg-dark text-white'>
                             <Button color='danger' onClick={this.handleDelete}>Delete</Button>{' '}
